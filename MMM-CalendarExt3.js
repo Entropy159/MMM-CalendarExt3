@@ -86,6 +86,10 @@ Module.register("MMM-CalendarExt3", {
     referenceDate: null,
 
     customHeader: false // true or function
+    headerColors: ["#ffffff"],
+    headerColorOffset: 0,
+    weekNames: ["Week"],
+    weekNamesOffset: 0,
   },
 
   defaulNotifications: {
@@ -440,6 +444,7 @@ Module.register("MMM-CalendarExt3", {
     dom.style.setProperty("--eventheight", options.eventHeight)
     dom.style.setProperty("--displayEndTime", (options.displayEndTime) ? "inherit" : "none")
     dom.style.setProperty("--displayWeatherTemp", (options.displayWeatherTemp) ? "inline-block" : "none")
+    dom.style.setProperty('--todayColor', this.getTodayColor())
     dom.dataset.mode = options.mode
 
     const makeCellDom = (d, seq) => {
@@ -463,7 +468,7 @@ Module.register("MMM-CalendarExt3", {
       h.classList.add("cellHeader")
 
       let cwDom = document.createElement("div")
-      cwDom.innerHTML = getWeekNo(tm, options)
+      cwDom.innerHTML = this.getWeekName(tm, (tm.getDay() === startDayOfWeek))
       cwDom.classList.add("cw")
       if (tm.getDay() === startDayOfWeek) {
         cwDom.classList.add("cwFirst")
@@ -788,5 +793,37 @@ Module.register("MMM-CalendarExt3", {
           }
         }
     )
-  }
+    }
+
+    getTodayColor: function () {
+        let now = new Date();
+        let start = new Date("2023-01-01T00:00:00");
+        let diff = now - start;
+        let oneDay = 1000 * 60 * 60 * 24;
+        let today = Math.floor(diff / oneDay) + this.config.headerColorOffset;
+        let colors = this.config.headerColors;
+        let amount = colors.length;
+        let index = today % amount;
+        return colors[index];
+    },
+
+    startOfWeek: function (date) {
+        let day = 1000 * 60 * 60 * 24;
+        let weekday = date.getDay();
+        return new Date(date.getTime() - Math.abs(0 - weekday) * day);
+    },
+
+    getWeekName: function (date, isStart) {
+        if (!isStart) {
+            return "";
+        }
+        let names = this.config.weekNames;
+        let amount = names.length;
+        let offset = this.config.weekNamesOffset;
+        let start = new Date("2023-01-01T00:00:00");
+        let oneWeek = 1000 * 60 * 60 * 24 * 7;
+        let thisWeek = Math.ceil((this.startOfWeek(date) - this.startOfWeek(start)) / oneWeek) + offset;
+        let index = thisWeek % amount;
+        return names[index];
+    },
 })
