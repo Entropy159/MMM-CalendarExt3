@@ -85,7 +85,7 @@ Module.register("MMM-CalendarExt3", {
     monthIndex: 0,
     referenceDate: null,
 
-    customHeader: false // true or function
+    customHeader: false, // true or function
     headerColors: ["#ffffff"],
     headerColorOffset: 0,
     weekNames: ["Week"],
