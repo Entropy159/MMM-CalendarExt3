@@ -153,7 +153,7 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
 
 .CX3 .today .cellDate {
   font-weight: bold;
-  background-color: white;
+  background-color: var(--todayColor);
   color: black;
   border-radius: 8px;
   padding: 1px 8px;
@@ -190,7 +190,8 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
   padding: 0 2px;
   text-align: left;
   grid-row: span 1;
-  color: var(--defaultcolor);
+  color: var(--oppositeColor);
+  background-color: var(--calendarColor);
   display: flex;
   justify-content: flex-start;
   gap: 2px;
