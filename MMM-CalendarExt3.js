@@ -54,7 +54,7 @@ Module.register("MMM-CalendarExt3", {
     animationSpeed: 2000,
     useSymbol: true,
     displayLegend: false,
-    useWeather: true,
+    useWeather: false,
     weatherLocationName: null,
     //notification: 'CALENDAR_EVENTS', /* reserved */
     manipulateDateCell: (cellDom, events) => { },
@@ -461,9 +461,6 @@ Module.register("MMM-CalendarExt3", {
         `weekday_${tm.getDay()}`
       )
       cell.dataset.date = new Date(tm.getFullYear(), tm.getMonth(), tm.getDate()).valueOf()
-      options.weekends.forEach((w, i) => {
-        if (tm.getDay() === w) cell.classList.add("weekend", `weekend_${i + 1}`)
-      })
       let h = document.createElement("div")
       h.classList.add("cellHeader")
 
