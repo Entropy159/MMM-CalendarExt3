@@ -8,7 +8,7 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
   /* you CAN modify these values; but SHOULD NOT to remove */
   --celllinecolor: #333;
   --cellbgcolor: rgb(0 0 0 / 20%);
-  --cellheaderheight: 25px;
+  --cellheaderheight: 42px;
   --cellfooterheight: 2px;
   --defaultcolor: #fff;
   --eventheight: calc(var(--fontsize) + 4px);
@@ -139,7 +139,7 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
 }
 
 .CX3 .cw::before {
-  content: "CW";
+  content: "CFM: ";
   margin-right: 5px;
 }
 
