@@ -472,27 +472,6 @@ Module.register("MMM-CalendarExt3", {
       }
 
       h.append(cwDom)
-
-      let forecasted = this.forecast.find((e) => {
-        return (tm.toLocaleDateString("en-CA") === e.dateId)
-      })
-
-      if (forecasted && forecasted?.weatherType) {
-        let weatherDom = document.createElement("div")
-        weatherDom.classList.add("cellWeather")
-        let icon = document.createElement("span")
-        icon.classList.add("wi", `wi-${forecasted.weatherType}`)
-        weatherDom.append(icon)
-        let maxTemp = document.createElement("span")
-        maxTemp.classList.add("maxTemp", "temperature")
-        maxTemp.innerHTML = Math.round(forecasted.maxTemperature)
-        weatherDom.append(maxTemp)
-        let minTemp = document.createElement("span")
-        minTemp.classList.add("minTemp", "temperature")
-        minTemp.innerHTML = Math.round(forecasted.minTemperature)
-        weatherDom.append(minTemp)
-        h.append(weatherDom)
-      }
       let dateDom = document.createElement("div")
       dateDom.classList.add("cellDate")
       let dParts = new Intl.DateTimeFormat(options.locale, options.cellDateOptions).formatToParts(tm)

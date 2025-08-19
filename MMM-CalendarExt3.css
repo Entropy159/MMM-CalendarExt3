@@ -383,19 +383,6 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
   filter: saturate(2);
 }
 
-.CX3 .weekend {
-  color: crimson;
-  font-weight: bold;
-}
-
-.CX3 .weekend_2 {
-  color: crimson;
-}
-
-.CX3 .weekend_1 {
-  color: dodgerblue;
-}
-
 .CX3 .cellHeader .cellDate {
   flex-grow: 3;
 }
