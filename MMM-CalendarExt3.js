@@ -20,9 +20,9 @@ Module.register("MMM-CalendarExt3", {
     mode: "week", // or 'month', 'day'
     weekIndex: -1, // Which week from this week starts in a view. Ignored on mode 'month'
     dayIndex: -1,
-    weeksInView: 3, //  How many weeks will be displayed. Ignored on mode 'month'
+    weeksInView: 6, //  How many weeks will be displayed. Ignored on mode 'month'
     instanceId: null,
-    firstDayOfWeek: null, // 0: Sunday, 1: Monday
+    firstDayOfWeek: 0, // 0: Sunday, 1: Monday
     minimalDaysOfNewYear: null, // When the first week of new year starts in your country.
     weekends: [], // or [0, 6]. 0: Sunday, 6: Saturday
     locale: null, // 'de' or 'en-US' or prefer array like ['en-CA', 'en-US', 'en']
@@ -40,7 +40,7 @@ Module.register("MMM-CalendarExt3", {
       month: "long"
     },
     calendarSet: [],
-    maxEventLines: 5, // How many events will be shown in a day cell.
+    maxEventLines: 6, // How many events will be shown in a day cell.
     // It could be possible to use {} like {"4": 6, "5": 5, "6": 4} to set different lines by the number of the week of the month.
     // Also, it could be possible to use [] like [8, 8, 7, 6, 5] to set different lines by the number of week of the month.
     fontSize: "18px",
@@ -65,7 +65,7 @@ Module.register("MMM-CalendarExt3", {
     displayEndTime: false,
     displayWeatherTemp: false,
     popoverTemplate: "./popover.html",
-    popoverTimeout: 1000 * 30,
+    popoverTimeout: 1000 * 15,
     popoverPeriodOptions: {
       dateStyle: "short",
       timeStyle: "short"
