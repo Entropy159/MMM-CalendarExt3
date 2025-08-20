@@ -386,6 +386,10 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
 
 .CX3 .cellHeader .cellDate {
   flex-grow: 3;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .CX3 .cellHeader .cellWeather {
