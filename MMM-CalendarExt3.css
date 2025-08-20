@@ -99,13 +99,14 @@ selector-pseudo-class-no-unknown, keyframes-name-pattern,
   right: 4px;
   width: 18px;
   height: 18px;
-  color: black;
+  color: white;
   font-weight: bold;
   font-size: 14px;
   border-radius: 9px;
-  background-color: white;
+  background-color: black;
   z-index: 30;
   text-overflow: "+";
+  line-height: 18px;
 }
 
 .CX3 .cellHeader {
