@@ -777,37 +777,37 @@ Module.register("MMM-CalendarExt3", {
           }
         }
     )
-    },
+  },
 
-    getTodayColor: function () {
-        let now = new Date();
-        let start = new Date("2023-01-01T00:00:00");
-        let diff = now - start;
-        let oneDay = 1000 * 60 * 60 * 24;
-        let today = Math.floor(diff / oneDay) + this.config.headerColorOffset;
-        let colors = this.config.headerColors;
-        let amount = colors.length;
-        let index = today % amount;
-        return colors[index];
-    },
+  getTodayColor () {
+    let now = new Date();
+    let start = new Date("2023-01-01T00:00:00");
+    let diff = now - start;
+    let oneDay = 1000 * 60 * 60 * 24;
+    let today = Math.floor(diff / oneDay) + this.config.headerColorOffset;
+    let colors = this.config.headerColors;
+    let amount = colors.length;
+    let index = today % amount;
+    return colors[index];
+  },
 
-    startOfWeek: function (date) {
-        let day = 1000 * 60 * 60 * 24;
-        let weekday = date.getDay();
-        return new Date(date.getTime() - Math.abs(0 - weekday) * day);
-    },
+  startOfWeek (date) {
+    let day = 1000 * 60 * 60 * 24;
+    let weekday = date.getDay();
+    return new Date(date.getTime() - Math.abs(0 - weekday) * day);
+  },
 
-    getWeekName: function (date, isStart) {
-        if (!isStart) {
-            return "";
-        }
-        let names = this.config.weekNames;
-        let amount = names.length;
-        let offset = this.config.weekNamesOffset;
-        let start = new Date("2023-01-01T00:00:00");
-        let oneWeek = 1000 * 60 * 60 * 24 * 7;
-        let thisWeek = Math.ceil((this.startOfWeek(date) - this.startOfWeek(start)) / oneWeek) + offset;
-        let index = thisWeek % amount;
-        return names[index];
+  getWeekName (date, isStart) {
+    if (!isStart) {
+      return "";
     }
+    let names = this.config.weekNames;
+    let amount = names.length;
+    let offset = this.config.weekNamesOffset;
+    let start = new Date("2023-01-01T00:00:00");
+    let oneWeek = 1000 * 60 * 60 * 24 * 7;
+    let thisWeek = Math.ceil((this.startOfWeek(date) - this.startOfWeek(start)) / oneWeek) + offset;
+    let index = thisWeek % amount;
+    return names[index];
+  }
 })
