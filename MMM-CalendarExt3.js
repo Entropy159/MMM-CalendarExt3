@@ -88,7 +88,7 @@ Module.register("MMM-CalendarExt3", {
     headerColors: ["#ffffff"],
     headerColorOffset: 0,
     weekNames: ["Week"],
-    weekNamesOffset: 0,
+    weekNamesOffset: 0
   },
 
   defaulNotifications: {
