@@ -375,7 +375,7 @@ Module.register("MMM-CalendarExt3", {
     }
 
     if (notification === this.notifications.eventNotification) {
-      convertedPayload.forEach(event => {
+      payload.forEach(event => {
         if (event.originalColor) {
           event.color = event.originalColor;
         }
