@@ -875,6 +875,7 @@ Module.register("MMM-CalendarExt3", {
       config: options,
       range: [boc, eoc]
     })
+    Log.info(`Event pool: ${JSON.stringify(this.eventPool, null, 2)}`)
     Log.info(`Target events: ${JSON.stringify(targetEvents, null, 2)}`)
     if (options.showHeader) makeDayHeaderDom(dom, options, { boc, eoc })
     makeWeekGridDom(dom, options, targetEvents, { boc, eoc })
