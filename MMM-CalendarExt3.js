@@ -867,6 +867,8 @@ Module.register("MMM-CalendarExt3", {
     const { boc, eoc } = rangeCalendar(moment, options)
     dom.dataset.beginOfCalendar = boc.valueOf()
     dom.dataset.endOfCalendar = eoc.valueOf()
+    const pool = this.eventPool;
+    Log.info(`Event pool: ${JSON.stringify(pool, null, 2)}`)
     const targetEvents = prepareEvents({
       targetEvents: regularizeEvents({
         eventPool: this.eventPool,
@@ -875,7 +877,6 @@ Module.register("MMM-CalendarExt3", {
       config: options,
       range: [boc, eoc]
     })
-    Log.info(`Event pool: ${JSON.stringify(this.eventPool, null, 2)}`)
     Log.info(`Target events: ${JSON.stringify(targetEvents, null, 2)}`)
     if (options.showHeader) makeDayHeaderDom(dom, options, { boc, eoc })
     makeWeekGridDom(dom, options, targetEvents, { boc, eoc })
