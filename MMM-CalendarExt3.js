@@ -376,6 +376,7 @@ Module.register("MMM-CalendarExt3", {
 
     if (notification === this.notifications.eventNotification) {
       const convertedPayload = this.notifications.eventPayload(payload)
+      Log.info(`Received events: ${convertedPayload}`)
       this.eventPool.set(sender.identifier, structuredClone(convertedPayload))
     }
 
@@ -867,7 +868,6 @@ Module.register("MMM-CalendarExt3", {
     const { boc, eoc } = rangeCalendar(moment, options)
     dom.dataset.beginOfCalendar = boc.valueOf()
     dom.dataset.endOfCalendar = eoc.valueOf()
-    Log.info(`Event pool: ${JSON.stringify(eventPool, null, 2)}`)
     const targetEvents = prepareEvents({
       targetEvents: regularizeEvents({
         eventPool: this.eventPool,
