@@ -376,7 +376,7 @@ Module.register("MMM-CalendarExt3", {
 
     if (notification === this.notifications.eventNotification) {
       const convertedPayload = this.notifications.eventPayload(payload)
-      Log.info(`Received events: ${convertedPayload}`)
+      Log.info(`Received events: ${JSON.stringify(convertedPayload, null, 2)}`)
       this.eventPool.set(sender.identifier, structuredClone(convertedPayload))
     }
 
