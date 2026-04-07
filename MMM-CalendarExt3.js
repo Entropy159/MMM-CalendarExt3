@@ -867,8 +867,7 @@ Module.register("MMM-CalendarExt3", {
     const { boc, eoc } = rangeCalendar(moment, options)
     dom.dataset.beginOfCalendar = boc.valueOf()
     dom.dataset.endOfCalendar = eoc.valueOf()
-    const pool = this.eventPool;
-    Log.info(`Event pool: ${JSON.stringify(pool, null, 2)}`)
+    Log.info(`Event pool: ${JSON.stringify(eventPool, null, 2)}`)
     const targetEvents = prepareEvents({
       targetEvents: regularizeEvents({
         eventPool: this.eventPool,
