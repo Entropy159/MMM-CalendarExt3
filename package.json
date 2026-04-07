@@ -1,6 +1,6 @@
 {
   "name": "mmm-calendarext3",
-  "version": "1.10.2",
+  "version": "1.12.1",
   "description": "MagicMirror module for calendar view",
   "keywords": [
     "MM",
@@ -21,17 +21,22 @@
   "type": "commonjs",
   "main": "MMM-CalendarExt3.js",
   "scripts": {
+    "demo": "cd ../../ && MM_CONFIG_FILE=modules/MMM-CalendarExt3/demo.config.js node --run start:wayland:dev",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "postinstall": "git submodule update --init --recursive",
     "postupdate": "git submodule update --init --recursive",
-    "test": "node --run lint"
+    "release": "commit-and-tag-version --config ./changelog.config.js",
+    "test": "node --run lint && node --run test:unit",
+    "test:unit": "node --test tests/unit/**/*.test.cjs"
   },
   "devDependencies": {
-    "@eslint/css": "^0.11.1",
-    "@eslint/js": "^9.37.0",
-    "@eslint/markdown": "^7.3.0",
-    "eslint": "^9.37.0",
-    "globals": "^16.4.0"
+    "@eslint/css": "^1.1.0",
+    "@eslint/js": "^10.0.1",
+    "@eslint/markdown": "^8.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "commit-and-tag-version": "^12.7.1",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0"
   }
 }

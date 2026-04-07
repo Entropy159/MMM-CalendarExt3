@@ -1,14 +1,14 @@
 # MMM-CalendarExt3
 
-MagicMirror module for calendar view.
+**MMM-CalendarExt3** is a lightweight calendar module for [MagicMirror²](https://magicmirror.builders/) with week/month views, weather integration, and interactive popovers.
 
 ## Screenshot
 
-![screenshot](https://raw.githubusercontent.com/MMRIZE/public_ext_storage/main/MMM-CalendarExt3/calendarext3.png)
+![screenshot](screenshot.png)
 
 ## Concept
 
-My previous module, `MMM-CalendarExt2`, was always notorious for its difficulty to use. I need a more easy and light one. So I re-write this from scratch newly.
+The previous module, `MMM-CalendarExt2`, was always notorious for its difficulty to use. I need a more easy and light one. So I re-write this from scratch newly.
 
 ## Features
 
@@ -123,6 +123,7 @@ All the properties are omittable, and if omitted, a default value will be applie
 |`instanceId` | (auto-generated) | When you want more than 1 instance of this module, each instance would need this value to distinguish each other. If you don't assign this property, the `identifier` of the module instance will be assigned automatically but not recommended to use it. (Hard to guess the auto-assigned value.)|
 |`locale` | (`language` of MM config) | `de` or `ko-KR` or `ja-Jpan-JP-u-ca-japanese-hc-h12`. It defines how to handle and display your date-time values by the locale. When omitted, the default `language` config value of MM. |
 |`calendarSet` | [] | When you want to display only selected calendars, fulfil this array with the targeted calendar name(of the default `calendar` module). <br>e.g) `calendarSet: ['us_holiday', 'office'],`<br> `[]` or `null` will allow all the calendars. |
+|`showWeekNumber` | `true` | Whether to show the calendar week number (`CW 42`). Set to `false` to hide it. |
 |`fontSize` | '18px' | Default font size of this module. |
 |`eventHeight` | '22px' | The height of each event. |
 |`cellDateOptions` | {month: 'short', <br>day: 'numeric'} | The format of day cell date. It varies by the `locale` and this option. <br>`locale:'en-US'`, the default displaying will be `Jun 1` or `1`. <br> See [options](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#parameters) |
@@ -132,8 +133,8 @@ All the properties are omittable, and if omitted, a default value will be applie
 |`eventSorter`| callback function | See the `Sorting` part.|
 |`eventTransformer`| callback function | See the `Transforming` part.|
 |`waitFetch`| 5000 | (ms) waiting the fetching of last calendar to prevent flickering view by too frequent fetching. |
-|`refreshInterval`| 1800000 | (ms) refresh view by force if you need it. |
-|`animationSpeed` | 1000 | (ms) Refreshing the view smoothly. |
+|`refreshInterval`| 600000 | (ms) refresh view by force if you need it. |
+|`animationSpeed` | 2000 | (ms) Refreshing the view smoothly. |
 |`useSymbol` | true | Whether to show font-awesome symbold instead of simple dot icon. |
 |`displayLegend` | false | If you set as true, legend will be displayed. (Only the clanear which has name assigned)|
 |`eventNotification`| 'CALENDAR_EVENTS' | A carrier notification of event source.|
@@ -153,7 +154,7 @@ All the properties are omittable, and if omitted, a default value will be applie
 |`animateOut` | 'fadeOut' | Animation effect on refresh. |
 |`skipPassedEventToday`| false | If set `true`, the passed singleday events (not fullday, not multiday events) of today will be disappeard to save screen asset. It will be useful when you have too many events to show in `maxEventLines`. It will be applied only for `today`.|
 |`showMore` | true | When the number of events is more than `maxEventLines`, the number of overflowed events would be displayed in the right-bottom cornor of the cell. And also it will popover whole day event list by click/touch it.|
-|`useIconify` | false | If set `true`, You can use `iconify-icon` instead of `fontawesome`. |
+|`useIconify` | true | If set `true`, You can use `iconify-icon` instead of `fontawesome`. |
 |`weekends` | auto-filled by locale. |(Array of day order). e.g. `weekends: [1, 3]` means Monday and Wedneseday would be regarded as weekends. Usually you don't have to set this value. <br> **Auto-filled by locale unless you set manually.** |
 |`firstDayOfWeek`| auto-filled by locale | Monday is the first day of the week according to the international standard ISO 8601, but in the US, Canada, Japan and some cultures, it's counted as the second day of the week. If you want to start the week from Monday, set this property to `1`. If you want Sunday, set `0`. <br> Sunday:0, Monday:1, Tuesday:2, ..., Saturday:6 <br> **Auto-filled by locale unless you set manually.** |
 |`minimalDaysOfNewYear` | auto-filled by locale | ISO 8601 also says **each week's year is the Gregorian year in which the Thursday falls**. The first week of the year, hence, always contains 4 January. However, the US (Yes, it is.) system differs from standards. In the US, **containing 1 January** defines the first week. In that case, set this value to `1`. And under some other culture, you might need to modify this. <br> **Auto-filled by locale unless you set manually.** |
@@ -162,18 +163,13 @@ All the properties are omittable, and if omitted, a default value will be applie
 |`customHeader` | false | See `customHeader` section.
 |`headerTitleOptions`|{month: 'long'} | The format of header of the view. It varies by the `locale` and this option. <br> `locale:'en-US'`, the default displaying will be `December`. See `customHeader` section. |
 |`maxEventLines` | 5 | How many events will be displayed in 1-day cell. The overflowed events will be hidden. <br> This value could be an array or an object define multi value for week the rows of the calendar. See the `dynamic eventlines` part.|
+|`dynamicWeekHeight` | false | If set `true`, each week row height will shrink to the actually used event lines in that week (up to `maxEventLines`). This is useful for compact layouts but may cause visible layout jumping while events change. |
 |`showHeader` | true | If set `false`, the headers are disabled. Useful if have two instances running with one above the other to not have the headers repeat. |
 
 
 ## Notification
 
 ### Incoming Notifications
-
-#### **(deprecated)** `CX3_MOVE_CALENDAR`, payload: {instanceId, step}
-
-#### **(deprecated)** `CX3_GLANCE_CALENDAR`, payload: {instanceId, step}
-
-#### **(deprecated)** `CX3_SET_DATE`, payload: {instanceId, date}
 
 #### `CX3_GET_CONFIG`, payload: { callback, instanceId? }
 
@@ -263,6 +259,8 @@ You can handle almost all of the visual things with CSS. See the `module.css` an
 The most commonly used values would be defined in the `.CX3` selector as variables.
 
 `--fontsize`, `--maxeventlines`, `--eventheight` would be imported from configuration for your setup convenience.
+
+When `dynamicWeekHeight: true`, each `.week` node gets `--weekeventlines` and `data-week-event-lines` to represent the actually used lines of that week.
 
 - `.cell` : Each day cell has this selector. Each cell could have these class names together by its condition.
   - `.today`, `.thisMonth`, `.thisYear`
@@ -527,6 +525,17 @@ So you can adjust the view more detailly.
 }
 ```
 
+### dynamic week height by actual event usage
+
+Enable this option when you want each week row to use only the needed event lines.
+
+```js
+dynamicWeekHeight: true,
+```
+
+- Uses `maxEventLines` as the upper bound.
+- Empty weeks become very compact.
+
 ### Weather forecast
 
 When you are using MM's default `weather` forecasting, the weather icon will be displayed on the day cell.
@@ -568,8 +577,10 @@ Please see the [Code of Conduct](CODE_OF_CONDUCT.md). By contributing you agree 
 
 ### Developer commands
 
+- `node --run demo` - Start MagicMirror with demo config showcasing and testing the module.
 - `node --run lint` - Run linting and formatter checks.
 - `node --run lint:fix` - Fix linting and formatter issues.
+- `node --run release` - Create a new release. (Bumps version, creates changelog, commits, tags)
 
 ## License
 
