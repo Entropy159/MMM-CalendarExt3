@@ -377,6 +377,11 @@ Module.register("MMM-CalendarExt3", {
     if (notification === this.notifications.eventNotification) {
       Log.info(`Received events: ${JSON.stringify(payload, null, 2)}`)
       const convertedPayload = this.notifications.eventPayload(payload)
+      convertedPayload.forEach(event => {
+        if (event.originalColor) {
+          event.color = event.originalColor;
+        }
+      })
       Log.info(`Converted events: ${JSON.stringify(convertedPayload, null, 2)}`)
       this.eventPool.set(sender.identifier, structuredClone(convertedPayload))
     }
