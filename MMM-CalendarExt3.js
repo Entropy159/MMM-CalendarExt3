@@ -754,6 +754,7 @@ Module.register("MMM-CalendarExt3", {
         for (const packed of packedEvents) {
           const { event, startCol, endCol, assignedRow } = packed
           const eDom = renderEventAgenda(event, options, moment)
+          Log.info(`Event color for ${event.title}: ${event.color}`);
 
           // Set grid position explicitly
           eDom.style.gridColumnStart = startCol + 1
